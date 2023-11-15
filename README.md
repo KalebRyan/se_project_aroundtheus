@@ -1,5 +1,7 @@
 # Project 3: Around The U.S.
 
+https://kalebryan.github.io/se_project_aroundtheus/
+
 This is the project for Sprint 3 in the TripleTen course. It was created using HTML and CSS based on the Figma design given and the requirements for responsive development.
 
 **Project Features**
