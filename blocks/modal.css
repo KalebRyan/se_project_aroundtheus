@@ -39,6 +39,11 @@
   cursor: pointer;
 }
 
+.modal__close-button:hover {
+  background: transparent url(../images/close-icon_hover.svg) center / contain
+    no-repeat;
+}
+
 .modal__heading {
   margin: 0;
   padding: 0;
@@ -86,6 +91,10 @@
   font-size: 18px;
   line-height: 1.2em;
   cursor: pointer;
+}
+
+.modal__button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 @media screen and (max-width: 560px) {
