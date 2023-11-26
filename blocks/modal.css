@@ -85,4 +85,38 @@
   color: #fff;
   font-size: 18px;
   line-height: 1.2em;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 560px) {
+  .modal__close-button {
+    height: 26px;
+    width: 26px;
+    left: 90%;
+    bottom: calc(100% + 13px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal {
+    justify-content: center;
+  }
+  .modal__container {
+    max-width: 282px;
+    padding: 22px;
+  }
+
+  .modal__heading {
+    font-size: 18px;
+    min-width: 238px;
+  }
+
+  .modal__title {
+    min-width: 238px;
+    margin: 75px 0 0;
+  }
+
+  .modal__button {
+    font-size: 14px;
+  }
 }
