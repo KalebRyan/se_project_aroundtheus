@@ -1,5 +1,25 @@
 .card {
   max-width: 282px;
+  position: relative;
+}
+
+.card__delete-button {
+  background: url(../images/trash-icon.svg);
+  position: absolute;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  width: 18px;
+  height: 19px;
+  top: 18px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  opacity: 60%;
 }
 
 .card__image {

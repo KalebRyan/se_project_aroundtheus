@@ -25,7 +25,7 @@
   line-height: 1.2em;
 }
 
-.profile-modal__close-button {
+.modal__close-button {
   width: 40px;
   height: 40px;
   margin: 0;
@@ -39,7 +39,7 @@
   cursor: pointer;
 }
 
-.profile-modal__close-button:hover {
+.modal__close-button:hover {
   opacity: 60%;
 }
 
@@ -117,13 +117,7 @@
 }
 
 @media screen and (max-width: 560px) {
-  .profile-modal__close-button {
-    height: 26px;
-    width: 26px;
-    left: 90%;
-    bottom: calc(100% + 13px);
-  }
-  .card-modal__close-button {
+  .modal__close-button {
     height: 26px;
     width: 26px;
     left: 90%;

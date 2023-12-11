@@ -51,11 +51,7 @@
 
     <div class="modal" id="profile__edit-modal">
       <div class="modal__container">
-        <button
-          class="profile-modal__close-button"
-          id="profile-modal__close-button"
-          type="button"
-        ></button>
+        <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
           <input
@@ -81,11 +77,7 @@
 
     <div class="modal" id="card__add-modal">
       <div class="modal__container">
-        <button
-          class="card-modal__close-button"
-          id="card-modal__close-button"
-          type="button"
-        ></button>
+        <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">New Place</h3>
         <form class="modal__form">
           <input
@@ -111,6 +103,7 @@
 
     <template id="card__template">
       <li class="card">
+        <button class="card__delete-button"></button>
         <img src="" alt="" class="card__image" />
         <div class="card__description">
           <h2 class="card__title"></h2>
