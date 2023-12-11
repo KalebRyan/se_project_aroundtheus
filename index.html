@@ -34,7 +34,8 @@
             <p class="profile__description">Explorer</p>
           </div>
           <button
-            class="profile__add-button"
+            class="card__add-button"
+            id="card__add-button"
             type="button"
             aria-label="add"
           ></button>
@@ -51,28 +52,58 @@
     <div class="modal" id="profile__edit-modal">
       <div class="modal__container">
         <button
-          class="modal__close-button"
-          id="modal__close-button"
+          class="profile-modal__close-button"
+          id="profile-modal__close-button"
           type="button"
         ></button>
         <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
           <input
             type="text"
-            name="title"
-            class="modal__input modal__title"
+            name="name"
+            class="modal__input modal__input_type_name"
             placeholder="Name"
             required
           />
           <input
             type="text"
             name="description"
-            class="modal__input modal__description"
+            class="modal__input modal__input_type_description"
             placeholder="Description"
             required
           />
           <button type="submit" class="modal__button" aria-label="save">
             Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="card__add-modal">
+      <div class="modal__container">
+        <button
+          class="card-modal__close-button"
+          id="card-modal__close-button"
+          type="button"
+        ></button>
+        <h3 class="modal__heading">New Place</h3>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__input_type_title"
+            placeholder="Title"
+            required
+          />
+          <input
+            type="text"
+            name="link"
+            class="modal__input modal__input_type_link"
+            placeholder="Image link"
+            required
+          />
+          <button type="submit" class="modal__button" aria-label="create">
+            Create
           </button>
         </form>
       </div>
