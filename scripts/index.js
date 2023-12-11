@@ -97,11 +97,7 @@ initialCards.forEach((cardData) => {
 });
 
 profileEditButton.addEventListener("click", openProfileEditModal);
-
 profileCloseButton.addEventListener("click", closeProfileEditModal);
-
 profileEditForm.addEventListener("submit", handleProfileFormSubmit);
-
 addCardButton.addEventListener("click", openAddCardModal);
-
 addCardClosebutton.addEventListener("click", closeAddCardModal);

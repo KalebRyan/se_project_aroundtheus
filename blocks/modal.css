@@ -64,7 +64,7 @@
 .modal__heading {
   margin: 0;
   padding: 0;
-  min-width: 330px;
+  min-width: 238px;
   font-weight: 900;
   font-size: 24px;
 }
@@ -123,6 +123,12 @@
     left: 90%;
     bottom: calc(100% + 13px);
   }
+  .card-modal__close-button {
+    height: 26px;
+    width: 26px;
+    left: 90%;
+    bottom: calc(100% + 13px);
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -142,8 +148,12 @@
     font-size: 18px;
   }
 
-  .modal__title {
-    margin: 75px 0 0;
+  .modal__input_type_name {
+    margin: 62px 0 0;
+  }
+
+  .modal__input_type_title {
+    margin: 62px 0 0;
   }
 
   .modal__button {
