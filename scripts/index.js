@@ -61,7 +61,7 @@ function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeProfileEditModal();
+  closeModal(profileEditModal);
 }
 
 function getCardElement(cardData) {
