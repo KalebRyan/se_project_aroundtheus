@@ -48,6 +48,10 @@ function openModal(modal) {
   modal.classList.add("modal_opened");
 }
 
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+}
+
 function openProfileEditModal() {
   openModal(profileEditModal);
   fillProfileForm();
@@ -56,10 +60,6 @@ function openProfileEditModal() {
 function fillProfileForm() {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-}
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
 }
 
 function closeProfileEditModal() {
@@ -85,9 +85,11 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
+
   return cardElement;
 }
 
