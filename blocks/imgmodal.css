@@ -1,0 +1,19 @@
+.modal__image-container {
+  margin: auto;
+  font-family: Inter, Arial, serif;
+  line-height: 1.2em;
+  font-weight: 400;
+  font-size: 12px;
+  position: relative;
+  display: block;
+}
+
+.modal__preview-image {
+  max-width: 75vw;
+  max-height: 75vh;
+  display: block;
+}
+
+.modal__image-caption {
+  margin: 10px 0 0;
+}
