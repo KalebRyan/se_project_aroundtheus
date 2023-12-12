@@ -65,7 +65,7 @@
   max-width: 415px;
 }
 
-.card__add-button {
+.profile__add-button {
   background: transparent url(../images/add-icon.svg) center no-repeat;
   width: 150px;
   height: 50px;
@@ -77,7 +77,7 @@
   cursor: pointer;
 }
 
-.card__add-button:hover {
+.profile__add-button:hover {
   opacity: 60%;
 }
 
@@ -98,7 +98,7 @@
     max-width: 196px;
   }
 
-  .card__add-button {
+  .profile__add-button {
     width: 50px;
   }
 }
@@ -136,7 +136,7 @@
     font-size: 14px;
   }
 
-  .card__add-button {
+  .profile__add-button {
     margin: 0;
     width: 282px;
   }

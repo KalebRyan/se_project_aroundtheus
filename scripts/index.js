@@ -48,7 +48,7 @@ const cardTemplate =
 
 // Add Card Modal
 const addCardModal = document.querySelector("#card__add-modal");
-const addCardButton = document.querySelector("#card__add-button");
+const addCardButton = document.querySelector("#profile__add-button");
 const addCardForm = addCardModal.querySelector(".modal__form");
 const addCardCloseButton = addCardModal.querySelector(".modal__close-button");
 const cardTitleInput = addCardForm.querySelector(".modal__input_type_title");
