@@ -64,7 +64,6 @@ const previewImageCaption = previewImageModal.querySelector(
   ".modal__image-caption"
 );
 
-// Open and Close Modal Functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
 }
@@ -78,7 +77,6 @@ function fillProfileForm() {
   profileDescriptionInput.value = profileDescription.textContent;
 }
 
-// Form Listeners
 function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -94,7 +92,6 @@ function handleAddCardFormSubmit(e) {
   closeModal(addCardModal);
 }
 
-// Build Cards
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
