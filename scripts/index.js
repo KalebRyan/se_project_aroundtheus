@@ -90,6 +90,7 @@ function handleAddCardFormSubmit(e) {
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardList);
   closeModal(addCardModal);
+  addCardForm.reset();
 }
 
 function getCardElement(cardData) {
@@ -104,7 +105,7 @@ function getCardElement(cardData) {
   cardImage.addEventListener("click", () => {
     openModal(previewImageModal);
     previewImage.src = cardData.link;
-    cardImage.alt = cardData.name;
+    previewImage.alt = cardData.name;
     previewImageCaption.textContent = cardData.name;
   });
 
