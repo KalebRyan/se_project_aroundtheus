@@ -57,18 +57,31 @@
           <input
             type="text"
             name="name"
+            id="owner-name"
             class="modal__input modal__input_type_name"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__error" id="owner-name-error"></span>
           <input
-            type="url"
+            type="text"
             name="description"
+            id="owner-description"
             class="modal__input modal__input_type_description"
             placeholder="Description"
+            minlength="2"
+            maxlength="200"
             required
           />
-          <button type="submit" class="modal__button" aria-label="save">
+          <span class="modal__error" id="owner-description-error"></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            aria-label="save"
+            disabled
+          >
             Save
           </button>
         </form>
@@ -83,18 +96,29 @@
           <input
             type="text"
             name="title"
+            id="place-title"
             class="modal__input modal__input_type_title"
             placeholder="Title"
+            minlength="1"
+            maxlength="30"
             required
           />
+          <span class="modal__error" id="place-title-error"></span>
           <input
-            type="text"
+            type="url"
             name="link"
+            id="place-link"
             class="modal__input modal__input_type_link"
             placeholder="Image link"
             required
           />
-          <button type="submit" class="modal__button" aria-label="create">
+          <span class="modal__error" id="place-link-error"></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            aria-label="create"
+            disabled
+          >
             Create
           </button>
         </form>
@@ -125,5 +149,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
