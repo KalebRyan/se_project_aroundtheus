@@ -28,7 +28,7 @@ const initialCards = [
 // Profile Edit Modal
 const profileEditModal = document.querySelector("#profile__edit-modal");
 const profileEditButton = document.querySelector("#profile__edit-button");
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+const profileForm = document.forms["profile-form"];
 const profileCloseButton = profileEditModal.querySelector(
   ".modal__close-button"
 );
@@ -49,10 +49,10 @@ const cardTemplate =
 // Add Card Modal
 const addCardModal = document.querySelector("#card__add-modal");
 const addCardButton = document.querySelector("#profile__add-button");
-const addCardForm = addCardModal.querySelector(".modal__form");
+const cardForm = document.forms["card-form"];
 const addCardCloseButton = addCardModal.querySelector(".modal__close-button");
-const cardTitleInput = addCardForm.querySelector(".modal__input_type_title");
-const cardLinkInput = addCardForm.querySelector(".modal__input_type_link");
+const cardTitleInput = cardForm.querySelector(".modal__input_type_title");
+const cardLinkInput = cardForm.querySelector(".modal__input_type_link");
 
 // Preview Image Modal
 const previewImageModal = document.querySelector("#preview__image-modal");
@@ -101,13 +101,13 @@ function handleProfileFormSubmit(e) {
   closeModal(profileEditModal);
 }
 
-function handleAddCardFormSubmit(e) {
+function handleCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardList);
   closeModal(addCardModal);
-  addCardForm.reset();
+  cardForm.reset();
 }
 
 function getCardElement(cardData) {
@@ -144,8 +144,8 @@ function renderCard(cardData, list) {
 
 initialCards.forEach((cardData) => renderCard(cardData, cardList));
 
-profileEditForm.addEventListener("submit", handleProfileFormSubmit);
-addCardForm.addEventListener("submit", handleAddCardFormSubmit);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
+cardForm.addEventListener("submit", handleCardFormSubmit);
 
 profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);

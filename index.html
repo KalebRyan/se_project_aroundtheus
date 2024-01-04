@@ -53,7 +53,7 @@
       <div class="modal__container">
         <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form" novalidate>
+        <form class="modal__form" name="profile-form" novalidate>
           <input
             type="text"
             name="name"
@@ -76,12 +76,7 @@
             required
           />
           <span class="modal__error" id="owner-description-error"></span>
-          <button
-            type="submit"
-            class="modal__button"
-            aria-label="save"
-            disabled
-          >
+          <button type="submit" class="modal__button" aria-label="save">
             Save
           </button>
         </form>
@@ -92,7 +87,7 @@
       <div class="modal__container">
         <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">New Place</h3>
-        <form class="modal__form" novalidate>
+        <form class="modal__form" name="card-form" novalidate>
           <input
             type="text"
             name="title"
