@@ -29,9 +29,7 @@ const initialCards = [
 const profileEditModal = document.querySelector("#profile__edit-modal");
 const profileEditButton = document.querySelector("#profile__edit-button");
 const profileForm = document.forms["profile-form"];
-const profileCloseButton = profileEditModal.querySelector(
-  ".modal__close-button"
-);
+const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector(".modal__input_type_name");
@@ -50,15 +48,11 @@ const cardTemplate =
 const addCardModal = document.querySelector("#card__add-modal");
 const addCardButton = document.querySelector("#profile__add-button");
 const cardForm = document.forms["card-form"];
-const addCardCloseButton = addCardModal.querySelector(".modal__close-button");
 const cardTitleInput = cardForm.querySelector(".modal__input_type_title");
 const cardLinkInput = cardForm.querySelector(".modal__input_type_link");
 
 // Preview Image Modal
 const previewImageModal = document.querySelector("#preview__image-modal");
-const previewImageCloseButton = previewImageModal.querySelector(
-  ".modal__close-button"
-);
 const previewImage = previewImageModal.querySelector(".modal__preview-image");
 const previewImageCaption = previewImageModal.querySelector(
   ".modal__image-caption"
@@ -151,11 +145,9 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   fillProfileForm();
 });
-profileCloseButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
-);
 addCardButton.addEventListener("click", () => openModal(addCardModal));
-addCardCloseButton.addEventListener("click", () => closeModal(addCardModal));
-previewImageCloseButton.addEventListener("click", () =>
-  closeModal(previewImageModal)
-);
+
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
