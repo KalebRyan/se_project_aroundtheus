@@ -26,16 +26,16 @@
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
-              class="profile__edit-button"
               id="profile__edit-button"
+              class="profile__edit-button"
               type="button"
               aria-label="edit"
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
           <button
-            class="profile__add-button"
             id="profile__add-button"
+            class="profile__add-button"
             type="button"
             aria-label="add"
           ></button>
@@ -53,7 +53,7 @@
       <div class="modal__container">
         <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form">
+        <form class="modal__form" novalidate>
           <input
             type="text"
             name="name"
@@ -92,7 +92,7 @@
       <div class="modal__container">
         <button class="modal__close-button" type="button"></button>
         <h3 class="modal__heading">New Place</h3>
-        <form class="modal__form">
+        <form class="modal__form" novalidate>
           <input
             type="text"
             name="title"
