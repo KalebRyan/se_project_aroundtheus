@@ -1,3 +1,5 @@
+import Card from "./Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -132,6 +134,7 @@ function getCardElement(cardData) {
 }
 
 function renderCard(cardData, list) {
+  const card = new Card(cardData, "#card__template");
   const cardElement = getCardElement(cardData);
   list.prepend(cardElement);
 }
