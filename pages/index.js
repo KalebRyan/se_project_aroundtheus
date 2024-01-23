@@ -130,13 +130,13 @@ function handleCardFormSubmit(e) {
 
 function handleImageClick(cardData) {
   openModal(previewImageModal);
-  previewImage.src = cardData.link;
-  previewImage.alt = cardData.name;
-  previewImageCaption.textContent = cardData.name;
+  previewImage.src = cardData._link;
+  previewImage.alt = cardData._name;
+  previewImageCaption.textContent = cardData._name;
 }
 
 function renderCard(cardData, list) {
-  const card = new Card(cardData, "#card__template");
+  const card = new Card(cardData, "#card__template", handleImageClick);
   const cardElement = card.getCard();
   list.prepend(cardElement);
 }
@@ -150,6 +150,7 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
   fillProfileForm();
 });
+
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 
 closeButtons.forEach((button) => {
