@@ -106,28 +106,6 @@ function handleCardFormSubmit(e) {
   cardForm.reset();
 }
 
-// function getCardElement(cardData) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const cardImage = cardElement.querySelector(".card__image");
-//   const cardTitle = cardElement.querySelector(".card__title");
-//   const likeButton = cardElement.querySelector(".card__like-button");
-//   const deleteButton = cardElement.querySelector(".card__delete-button");
-
-//   deleteButton.addEventListener("click", () => cardElement.remove());
-
-//   cardImage.addEventListener("click", () => handleImageClick(cardData));
-
-//   likeButton.addEventListener("click", () =>
-//     likeButton.classList.toggle("card__like-button_active")
-//   );
-
-//   cardImage.src = cardData.link;
-//   cardImage.alt = cardData.name;
-//   cardTitle.textContent = cardData.name;
-
-//   return cardElement;
-// }
-
 function handleImageClick(cardData) {
   openModal(previewImageModal);
   previewImage.src = cardData._link;
