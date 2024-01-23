@@ -7,66 +7,66 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-function showInputError(
-  formElement,
-  inputElement,
-  { inputErrorClass, errorClass }
-) {
-  const errorMessageElement = formElement.querySelector(
-    `#${inputElement.id}-error`
-  );
+// function showInputError(
+//   formElement,
+//   inputElement,
+//   { inputErrorClass, errorClass }
+// ) {
+//   const errorMessageElement = formElement.querySelector(
+//     `#${inputElement.id}-error`
+//   );
 
-  inputElement.classList.add(inputErrorClass);
-  errorMessageElement.textContent = inputElement.validationMessage;
-  errorMessageElement.classList.add(errorClass);
-}
+//   inputElement.classList.add(inputErrorClass);
+//   errorMessageElement.textContent = inputElement.validationMessage;
+//   errorMessageElement.classList.add(errorClass);
+// }
 
-function hideInputError(
-  formElement,
-  inputElement,
-  { inputErrorClass, errorClass }
-) {
-  const errorMessageElement = formElement.querySelector(
-    `#${inputElement.id}-error`
-  );
+// function hideInputError(
+//   formElement,
+//   inputElement,
+//   { inputErrorClass, errorClass }
+// ) {
+//   const errorMessageElement = formElement.querySelector(
+//     `#${inputElement.id}-error`
+//   );
 
-  inputElement.classList.remove(inputErrorClass);
-  errorMessageElement.textContent = " ";
-  errorMessageElement.classList.remove(errorClass);
-}
+//   inputElement.classList.remove(inputErrorClass);
+//   errorMessageElement.textContent = " ";
+//   errorMessageElement.classList.remove(errorClass);
+// }
 
-function checkInputValidity(formElement, inputElement, config) {
-  if (!inputElement.validity.valid) {
-    return showInputError(formElement, inputElement, config);
-  }
-  hideInputError(formElement, inputElement, config);
-}
+// function checkInputValidity(formElement, inputElement, config) {
+//   if (!inputElement.validity.valid) {
+//     return showInputError(formElement, inputElement, config);
+//   }
+//   hideInputError(formElement, inputElement, config);
+// }
 
-function hasInvalidInput(inputList) {
-  return !inputList.every((inputElement) => inputElement.validity.valid);
-}
+// function hasInvalidInput(inputList) {
+//   return !inputList.every((inputElement) => inputElement.validity.valid);
+// }
 
-function disableButton(submitButton, inactiveButtonClass) {
-  submitButton.classList.add(inactiveButtonClass);
-  submitButton.disabled = true;
-}
+// function disableButton(submitButton, inactiveButtonClass) {
+//   submitButton.classList.add(inactiveButtonClass);
+//   submitButton.disabled = true;
+// }
 
-function enableButton(submitButton, inactiveButtonClass) {
-  submitButton.classList.remove(inactiveButtonClass);
-  submitButton.disabled = false;
-}
+// function enableButton(submitButton, inactiveButtonClass) {
+//   submitButton.classList.remove(inactiveButtonClass);
+//   submitButton.disabled = false;
+// }
 
-function toggleButtonState(
-  inputElements,
-  submitButton,
-  { inactiveButtonClass }
-) {
-  if (hasInvalidInput(inputElements)) {
-    disableButton(submitButton, inactiveButtonClass);
-    return;
-  }
-  enableButton(submitButton, inactiveButtonClass);
-}
+// function toggleButtonState(
+//   inputElements,
+//   submitButton,
+//   { inactiveButtonClass }
+// ) {
+//   if (hasInvalidInput(inputElements)) {
+//     disableButton(submitButton, inactiveButtonClass);
+//     return;
+//   }
+//   enableButton(submitButton, inactiveButtonClass);
+// }
 
 function setEventListeners(formElement, config) {
   const { inputSelector, submitButtonSelector } = config;
