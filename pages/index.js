@@ -1,4 +1,4 @@
-import Card from "./Card.js";
+import Card from "../components/Card.js";
 
 const initialCards = [
   {
@@ -106,36 +106,38 @@ function handleCardFormSubmit(e) {
   cardForm.reset();
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
+// function getCardElement(cardData) {
+//   const cardElement = cardTemplate.cloneNode(true);
+//   const cardImage = cardElement.querySelector(".card__image");
+//   const cardTitle = cardElement.querySelector(".card__title");
+//   const likeButton = cardElement.querySelector(".card__like-button");
+//   const deleteButton = cardElement.querySelector(".card__delete-button");
 
-  deleteButton.addEventListener("click", () => cardElement.remove());
+//   deleteButton.addEventListener("click", () => cardElement.remove());
 
-  cardImage.addEventListener("click", () => {
-    openModal(previewImageModal);
-    previewImage.src = cardData.link;
-    previewImage.alt = cardData.name;
-    previewImageCaption.textContent = cardData.name;
-  });
+//   cardImage.addEventListener("click", () => handleImageClick(cardData));
 
-  likeButton.addEventListener("click", () =>
-    likeButton.classList.toggle("card__like-button_active")
-  );
+//   likeButton.addEventListener("click", () =>
+//     likeButton.classList.toggle("card__like-button_active")
+//   );
 
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardTitle.textContent = cardData.name;
+//   cardImage.src = cardData.link;
+//   cardImage.alt = cardData.name;
+//   cardTitle.textContent = cardData.name;
 
-  return cardElement;
+//   return cardElement;
+// }
+
+function handleImageClick(cardData) {
+  openModal(previewImageModal);
+  previewImage.src = cardData.link;
+  previewImage.alt = cardData.name;
+  previewImageCaption.textContent = cardData.name;
 }
 
 function renderCard(cardData, list) {
   const card = new Card(cardData, "#card__template");
-  const cardElement = getCardElement(cardData);
+  const cardElement = card.getCard();
   list.prepend(cardElement);
 }
 
