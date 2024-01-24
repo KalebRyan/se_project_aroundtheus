@@ -105,6 +105,7 @@ function handleCardFormSubmit(e) {
   renderCard({ name, link }, cardList);
   closeModal(addCardModal);
   cardForm.reset();
+  addFormValidator.toggleButtonState();
 }
 
 function handleImageClick(cardData) {
