@@ -105,7 +105,7 @@ function handleCardFormSubmit(e) {
   renderCard({ name, link }, cardList);
   closeModal(addCardModal);
   cardForm.reset();
-  addFormValidator.toggleButtonState();
+  cardFormValidator.toggleButtonState();
 }
 
 function handleImageClick(cardData) {
@@ -147,7 +147,7 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const editFormValidator = new FormValidator(config, profileForm);
-const addFormValidator = new FormValidator(config, cardForm);
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
+const profileFormValidator = new FormValidator(config, profileForm);
+const cardFormValidator = new FormValidator(config, cardForm);
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
