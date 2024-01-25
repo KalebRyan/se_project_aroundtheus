@@ -71,11 +71,13 @@ export default class FormValidator {
     this._setEventListeners();
   }
 
-  toggleButtonState(inputElements) {
-    if (this._hasInvalidInput(inputElements)) {
-      this._disableButton(this._inactiveButtonClass);
+  resetValidation() {}
+
+  toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._disableButton();
       return;
     }
-    this._enableButton(this._inactiveButtonClass);
+    this._enableButton();
   }
 }

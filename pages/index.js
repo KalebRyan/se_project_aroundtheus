@@ -115,9 +115,13 @@ function handleImageClick(cardData) {
   previewImageCaption.textContent = cardData._name;
 }
 
-function renderCard(cardData, list) {
+function createCard(cardData) {
   const card = new Card(cardData, "#card__template", handleImageClick);
-  const cardElement = card.getCard();
+  return card.getCard();
+}
+
+function renderCard(cardData, list) {
+  const cardElement = createCard(cardData);
   list.prepend(cardElement);
 }
 
@@ -147,7 +151,31 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const profileFormValidator = new FormValidator(config, profileForm);
-const cardFormValidator = new FormValidator(config, cardForm);
-profileFormValidator.enableValidation();
-cardFormValidator.enableValidation();
+// define an object for storing validators
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((form) => {
+    const validator = new FormValidator(config, form);
+    // here you get the name of the form
+    const formName = form.getAttribute("name");
+
+    // here you store the validator using the `name` of the form
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(config);
+
+formValidators[profileForm.getAttribute("name")].resetValidation();
+
+// or you can use a string – the name of the form (you know it from `index.html`)
+
+// formValidators['profile-form'].resetValidation()
+
+// const profileFormValidator = new FormValidator(config, profileForm);
+// const cardFormValidator = new FormValidator(config, cardForm);
+// profileFormValidator.enableValidation();
+// cardFormValidator.enableValidation();
