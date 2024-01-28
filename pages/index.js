@@ -28,6 +28,15 @@ const initialCards = [
   },
 ];
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
 // Profile Edit Modal
 const profileEditModal = document.querySelector("#profile__edit-modal");
 const profileEditButton = document.querySelector("#profile__edit-button");
@@ -61,6 +70,7 @@ const previewImageCaption = previewImageModal.querySelector(
   ".modal__image-caption"
 );
 
+// Modal Functions
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalEscape);
@@ -114,6 +124,12 @@ function handleImageClick(cardData) {
   previewImageCaption.textContent = cardData._name;
 }
 
+closeButtons.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
+});
+
+// Card Rendering
 function createCard(cardData) {
   const card = new Card(cardData, "#card__template", handleImageClick);
   return card.getCard();
@@ -126,6 +142,7 @@ function renderCard(cardData, list) {
 
 initialCards.forEach((cardData) => renderCard(cardData, cardList));
 
+// Event Listeners
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
@@ -140,20 +157,7 @@ addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
 });
 
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => closeModal(modal));
-});
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
+// Form Validation
 const formValidators = {};
 
 const enableValidation = (config) => {
