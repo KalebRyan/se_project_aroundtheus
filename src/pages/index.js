@@ -7,24 +7,18 @@ import UserInfo from "../components/UserInfo.js";
 import {
   initialCards,
   config,
-  profileEditModal,
   profileEditButton,
   profileForm,
-  closeButtons,
   profileTitle,
   profileDescription,
   profileTitleInput,
   profileDescriptionInput,
   cardList,
   cardTemplate,
-  addCardModal,
   addCardButton,
   cardForm,
   cardTitleInput,
   cardLinkInput,
-  previewImageModal,
-  previewImage,
-  previewImageCaption,
 } from "../utils/constants.js";
 
 // Instantiations
@@ -67,22 +61,20 @@ const userInfo = new UserInfo({
   descriptionSelector: ".profile__description",
 });
 
-userInfo.getUserInfo();
-
 userInfo.setUserInfo({
   name: profileTitle.textContent,
   description: profileDescription.textContent,
 });
 
 function fillProfileForm() {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  const info = userInfo.getUserInfo();
+  profileTitleInput.value = info.name;
+  profileDescriptionInput.value = info.description;
 }
 
 // Handlers
 function handleProfileFormSubmit(data) {
-  profileTitle.textContent = data.name;
-  profileDescription.textContent = data.description;
+  userInfo.setUserInfo(data);
   editModal.close();
 }
 
