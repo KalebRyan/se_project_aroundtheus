@@ -58,15 +58,14 @@ function fillProfileForm() {
   profileDescriptionInput.value = profileDescription.textContent;
 }
 
-function handleProfileFormSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+function handleProfileFormSubmit(data) {
+  console.log(data);
+  profileTitle.textContent = data.name;
+  profileDescription.textContent = data.description;
   editModal.close();
 }
 
-function handleCardFormSubmit(e) {
-  e.preventDefault();
+function handleCardFormSubmit(data) {
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardList);
