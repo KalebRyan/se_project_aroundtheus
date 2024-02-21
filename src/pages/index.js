@@ -74,10 +74,10 @@ function handleCardFormSubmit(e) {
 }
 
 function handleImageClick(cardData) {
-  openModal(previewImageModal);
-  previewImage.src = cardData._link;
-  previewImage.alt = cardData._name;
-  previewImageCaption.textContent = cardData._name;
+  modalWithImage.open(cardData);
+  // previewImage.src = cardData._link;
+  // previewImage.alt = cardData._name;
+  // previewImageCaption.textContent = cardData._name;
 }
 
 closeButtons.forEach((button) => {
@@ -103,7 +103,7 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
 profileEditButton.addEventListener("click", () => {
-  openModal(profileEditModal);
+  editModalWithForm.open();
   fillProfileForm();
   formValidators[profileForm.getAttribute("name")].resetValidation();
 });
@@ -126,9 +126,20 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-const previewModal = new ModalWithImage(previewImageModal);
+const modalWithImage = new ModalWithImage({
+  modalSelector: "#preview__image-modal",
+});
+modalWithImage.setEventListeners();
 
-previewModal.setEventListeners();
+const editModalWithForm = new ModalWithForm({
+  modalSelector: "#profile__edit-modal",
+  // handleFormSubmit: (formData) => {
+  //   profileTitle.textContent = formData["profile-name"];
+  //   profileDescription.textContent = formData["profile-description"];
+  // },
+});
+
+// const newCardModalWithForm = new ModalWithForm({
 
 // Form Validation
 const formValidators = {};
