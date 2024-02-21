@@ -69,7 +69,7 @@ function handleCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardList);
-  closeModal(addCardModal);
+  newCardModal.close();
   cardForm.reset();
 }
 
