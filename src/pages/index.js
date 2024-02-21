@@ -73,9 +73,9 @@ function handleProfileFormSubmit(data) {
   editModal.close();
 }
 
-function handleCardFormSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardLinkInput.value;
+function handleCardFormSubmit(data) {
+  const name = data.title;
+  const link = data.link;
   renderCard({ name, link }, cardList);
   newCardModal.close();
 }
