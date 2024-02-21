@@ -61,7 +61,7 @@ function handleProfileFormSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
+  editModal.close();
 }
 
 function handleCardFormSubmit(e) {
@@ -80,10 +80,10 @@ function handleImageClick(cardData) {
   // previewImageCaption.textContent = cardData._name;
 }
 
-closeButtons.forEach((button) => {
-  const modal = button.closest(".modal");
-  button.addEventListener("click", () => modalWithImage.close(modal));
-});
+// closeButtons.forEach((button) => {
+//   const modal = button.closest(".modal");
+//   button.addEventListener("click", () => modalWithImage.close(modal));
+// });
 
 // Card Rendering
 function createCard(cardData) {
@@ -103,14 +103,14 @@ profileForm.addEventListener("submit", handleProfileFormSubmit);
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
 profileEditButton.addEventListener("click", () => {
-  editProfileModal.open();
+  editModal.open();
   fillProfileForm();
   formValidators[profileForm.getAttribute("name")].resetValidation();
 });
 
 addCardButton.addEventListener("click", () => {
   formValidators[cardForm.getAttribute("name")].resetValidation();
-  openModal(addCardModal);
+  newCardModal.open();
 });
 
 // Instantiations
@@ -131,17 +131,21 @@ const modalWithImage = new ModalWithImage({
 });
 modalWithImage.setEventListeners();
 
-const editProfileModal = new ModalWithForm({
-  modalSelector: "#profile__edit-modal",
-  // handleFormSubmit: (formData) => {
-  //   profileTitle.textContent = formData["profile-name"];
-  //   profileDescription.textContent = formData["profile-description"];
-  // },
-});
+const editModal = new ModalWithForm(
+  {
+    modalSelector: "#profile__edit-modal",
+  },
+  handleProfileFormSubmit
+);
+editModal.setEventListeners();
 
-// const newCardModal = new ModalWithForm({
-//   modalSelector: "#card__add-modal",
-// });
+const newCardModal = new ModalWithForm(
+  {
+    modalSelector: "#card__add-modal",
+  },
+  handleCardFormSubmit
+);
+newCardModal.setEventListeners();
 
 // Form Validation
 const formValidators = {};
