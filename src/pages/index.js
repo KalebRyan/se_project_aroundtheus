@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import ModalWithForm from "../components/ModalWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   initialCards,
   config,
@@ -146,6 +147,11 @@ const newCardModal = new ModalWithForm(
   handleCardFormSubmit
 );
 newCardModal.setEventListeners();
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  descriptionSelector: ".profile__description",
+});
 
 // Form Validation
 const formValidators = {};
