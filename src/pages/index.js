@@ -26,9 +26,8 @@ import {
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, cardTemplate);
-      const cardElement = card.generateCard();
+    renderer: (cardData) => {
+      const cardElement = renderCard(cardData);
       cardSection.addItem(cardElement);
     },
   },
@@ -62,11 +61,6 @@ const userInfo = new UserInfo({
   descriptionSelector: ".profile__description",
 });
 
-userInfo.setUserInfo({
-  name: profileTitle.textContent,
-  description: profileDescription.textContent,
-});
-
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
   profileTitleInput.value = info.name;
@@ -84,7 +78,6 @@ function handleCardFormSubmit() {
   const link = cardLinkInput.value;
   renderCard({ name, link }, cardList);
   newCardModal.close();
-  cardForm.reset();
 }
 
 function handleImageClick(cardData) {
