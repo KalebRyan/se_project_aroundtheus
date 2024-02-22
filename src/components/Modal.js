@@ -13,11 +13,11 @@ export default class Modal {
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
-  _handleEscClose(e) {
+  _handleEscClose = (e) => {
     if (e.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     this._modalElement.addEventListener("mousedown", (e) => {
