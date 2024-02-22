@@ -27,12 +27,14 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const cardElement = renderCard(cardData);
+      const cardElement = createCard(cardData);
       cardSection.addItem(cardElement);
     },
   },
   ".cards__list"
 );
+
+cardSection.renderItems();
 
 const modalWithImage = new ModalWithImage({
   modalSelector: "#preview__image-modal",
@@ -76,7 +78,7 @@ function handleProfileFormSubmit(data) {
 function handleCardFormSubmit(data) {
   const name = data.title;
   const link = data.link;
-  renderCard({ name, link }, cardList);
+  renderCard({ name, link });
   newCardModal.close();
 }
 
@@ -90,13 +92,12 @@ function createCard(cardData) {
   return card.getCard();
 }
 
-function renderCard(cardData, list) {
+function renderCard(cardData) {
   const cardElement = createCard(cardData);
-  list.prepend(cardElement);
+  cardSection.addItem(cardElement);
 }
 
-initialCards.forEach((cardData) => renderCard(cardData, cardList));
-
+// Event Listeners
 profileEditButton.addEventListener("click", () => {
   editModal.open();
   fillProfileForm();
