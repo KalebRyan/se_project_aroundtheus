@@ -21,20 +21,76 @@ import {
   cardTitleInput,
   cardLinkInput,
 } from "../utils/constants.js";
+import Api from "../components/Api.js";
 
-// Instantiations
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardElement = createCard(cardData);
-      cardSection.addItem(cardElement);
-    },
+// API Calls
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "24d24150-f342-4b21-ba37-43c96c87f158",
+    "Content-Type": "application/json",
   },
-  ".cards__list"
-);
+});
 
-cardSection.renderItems();
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardData]) => {
+    userInfo.setUserInfo(userData);
+    const cardSection = new Section(
+      {
+        items: cardData,
+        renderer: (cardData) => {
+          const card = new Card(cardData, "#card__template", handleImageClick);
+          cardSection.addItem(card.getCard());
+        },
+      },
+      ".cards__list"
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// api
+//   .getUserInfo()
+//   .then((res) => {
+//     userInfo.setUserInfo(res);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+// api
+//   .getInitialCards()
+//   .then((res) => {
+//     const cardSection = new Section(
+//       {
+//         items: res,
+//         renderer: (cardData) => {
+//           const cardElement = createCard(cardData);
+//           cardSection.addItem(cardElement);
+//         },
+//       },
+//       ".cards__list"
+//     );
+//     cardSection.renderItems(res);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//   });
+
+// const cardSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (cardData) => {
+//       const cardElement = createCard(cardData);
+//       cardSection.addItem(cardElement);
+//     },
+//   },
+//   ".cards__list"
+// );
+
+// cardSection.renderItems();
 
 const modalWithImage = new ModalWithImage({
   modalSelector: "#preview__image-modal",
@@ -61,6 +117,7 @@ newCardModal.setEventListeners();
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__avatar",
 });
 
 function fillProfileForm() {
@@ -76,9 +133,18 @@ function handleProfileFormSubmit(data) {
 }
 
 function handleCardFormSubmit(data) {
-  const name = data.title;
-  const link = data.link;
-  renderCard({ name, link });
+  api
+    .addCard(data)
+    .then((res) => {
+      const card = new Card(res, "#card__template", handleImageClick);
+      cardList.prepend(card.getCard());
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  // const name = data.title;
+  // const link = data.link;
+  // renderCard({ name, link });
   newCardModal.close();
 }
 
@@ -87,15 +153,15 @@ function handleImageClick(cardData) {
 }
 
 // Card Rendering
-function createCard(cardData) {
-  const card = new Card(cardData, "#card__template", handleImageClick);
-  return card.getCard();
-}
+// function createCard(cardData) {
+//   const card = new Card(cardData, "#card__template", handleImageClick);
+//   return card.getCard();
+// }
 
-function renderCard(cardData) {
-  const cardElement = createCard(cardData);
-  cardSection.addItem(cardElement);
-}
+// function renderCard(cardData) {
+//   const cardElement = createCard(cardData);
+//   cardSection.addItem(cardElement);
+// }
 
 // Event Listeners
 profileEditButton.addEventListener("click", () => {
