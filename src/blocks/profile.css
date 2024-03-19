@@ -11,6 +11,10 @@
   object-fit: cover;
   background-position: center;
   margin-right: 30px;
+  position: relative;
+}
+
+.profile__edit-avatar-button {
 }
 
 .profile__info {

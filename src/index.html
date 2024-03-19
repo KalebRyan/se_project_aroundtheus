@@ -22,15 +22,21 @@
             alt="Avatar"
             class="profile__image"
           />
+          <button
+            id="profile__edit-avatar-button"
+            class="profile__edit-avatar-button"
+            type="button"
+            aria-label="edit"
+          ></button>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button
               id="profile__edit-button"
               class="profile__edit-button"
               type="button"
               aria-label="edit"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             id="profile__add-button"
@@ -89,7 +95,7 @@
         <form class="modal__form" name="card-form" novalidate>
           <input
             type="text"
-            name="title"
+            name="name"
             id="place-title"
             class="modal__input modal__input_type_title"
             placeholder="Title"

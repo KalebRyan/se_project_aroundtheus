@@ -65,6 +65,9 @@ export const cardTitleInput = cardForm.querySelector(
   ".modal__input_type_title"
 );
 export const cardLinkInput = cardForm.querySelector(".modal__input_type_link");
+export const cardDeleteButton = cardTemplate.querySelector(
+  ".card__delete-button"
+);
 
 // Preview Image Modal
 export const previewImageModal = document.querySelector(
