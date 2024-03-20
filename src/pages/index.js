@@ -128,7 +128,6 @@ function handleProfileFormSubmit(data) {
     .catch((err) => {
       console.error(err);
     });
-  // userInfo.setUserInfo(data);
   editModal.close();
 }
 
@@ -215,55 +214,3 @@ const enableValidation = (config) => {
 };
 
 enableValidation(config);
-
-// api
-//   .getUserInfo()
-//   .then((res) => {
-//     userInfo.setUserInfo(res);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-// api
-//   .getInitialCards()
-//   .then((res) => {
-//     const cardSection = new Section(
-//       {
-//         items: res,
-//         renderer: (cardData) => {
-//           const cardElement = createCard(cardData);
-//           cardSection.addItem(cardElement);
-//         },
-//       },
-//       ".cards__list"
-//     );
-//     cardSection.renderItems(res);
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-// const cardSection = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (cardData) => {
-//       const cardElement = createCard(cardData);
-//       cardSection.addItem(cardElement);
-//     },
-//   },
-//   ".cards__list"
-// );
-
-// cardSection.renderItems();
-
-// Card Rendering
-// function createCard(cardData) {
-//   const card = new Card(cardData, "#card__template", handleImageClick);
-//   return card.getCard();
-// }
-
-// function renderCard(cardData) {
-//   const cardElement = createCard(cardData);
-//   cardSection.addItem(cardElement);
-// }
