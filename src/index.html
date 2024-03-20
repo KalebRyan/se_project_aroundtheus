@@ -127,6 +127,32 @@
       </div>
     </div>
 
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <button class="modal__close-button" type="button"></button>
+        <h3 class="modal__heading">Change Profile Picture</h3>
+        <form class="modal__form" name="avatar-form" novalidate>
+          <input
+            type="url"
+            name="avatar"
+            id="avatar-link"
+            class="modal__input modal__input_type_link"
+            placeholder="Image link"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            aria-label="save"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="modal" id="delete__card-modal">
       <div class="modal__container">
         <button class="modal__close-button" type="button"></button>
