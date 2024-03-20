@@ -119,7 +119,6 @@ function handleProfileFormSubmit(data) {
   api
     .setUserInfo(data)
     .then((res) => {
-      console.log(res);
       userInfo.setUserInfo(res);
     })
     .catch((err) => {
@@ -127,11 +126,6 @@ function handleProfileFormSubmit(data) {
     });
   // userInfo.setUserInfo(data);
   editModal.close();
-}
-
-function handleFormSubmit() {
-  newConfirmationModal.setLoading(true);
-  newConfirmationModal.setLoading(false);
 }
 
 function handleCardFormSubmit(data) {
@@ -150,9 +144,6 @@ function handleCardFormSubmit(data) {
     .catch((err) => {
       console.error(err);
     });
-  // const name = data.title;
-  // const link = data.link;
-  // renderCard({ name, link });
   newCardModal.close();
 }
 
@@ -162,32 +153,34 @@ function handleImageClick(cardData) {
 
 function handleDeleteClick() {
   newConfirmationModal.open();
-  api
-    .removeCard(this._id)
-    .then(() => {
-      this._handleDeleteIcon();
-      newConfirmationModal.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  newConfirmationModal._handleFormSubmit(() => {
+    api
+      .removeCard(this._id)
+      .then(() => {
+        this._handleDeleteIcon();
+        newConfirmationModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 }
 
-function handleLikeClick() {
-  if (this._isLiked) {
+function handleLikeClick(card) {
+  if (card.isLiked) {
     api
-      .removeLike(this._id)
-      .then(() => {
-        this._handleLikeIcon();
+      .removeLike(card.id)
+      .then((res) => {
+        card.handleLikeIcon(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
       });
   } else {
     api
-      .likeCard(this._id)
-      .then(() => {
-        this._handleLikeIcon();
+      .likeCard(card.id)
+      .then((res) => {
+        card._handleLikeIcon(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
