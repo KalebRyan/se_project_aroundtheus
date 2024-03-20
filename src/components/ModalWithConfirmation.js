@@ -9,11 +9,9 @@ export default class ModalWithConfirmation extends Modal {
   }
 
   setLoading(isLoading) {
-    if (isLoading) {
-      this._saveButton.textContent = "Saving...";
-    } else {
-      this._saveButton.textContent = "Saved.";
-    }
+    isLoading
+      ? (this._saveButton.textContent = "Saving...")
+      : (this._saveButton.textContent = "Saved.");
   }
 
   setEventListeners() {

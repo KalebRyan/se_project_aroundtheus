@@ -115,6 +115,10 @@ function fillProfileForm() {
 }
 
 // Handlers
+function handleImageClick(cardData) {
+  modalWithImage.open(cardData);
+}
+
 function handleProfileFormSubmit(data) {
   api
     .setUserInfo(data)
@@ -147,17 +151,13 @@ function handleCardFormSubmit(data) {
   newCardModal.close();
 }
 
-function handleImageClick(cardData) {
-  modalWithImage.open(cardData);
-}
-
-function handleDeleteClick() {
+function handleDeleteClick(card) {
   newConfirmationModal.open();
   newConfirmationModal._handleFormSubmit(() => {
     api
-      .removeCard(this._id)
+      .removeCard(card.id)
       .then(() => {
-        this._handleDeleteIcon();
+        card.handleDeleteIcon();
         newConfirmationModal.close();
       })
       .catch((err) => {
