@@ -52,8 +52,8 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
             cardData,
             "#card__template",
             handleImageClick,
-            handleLikeClick,
-            handleDeleteClick
+            handleDeleteClick,
+            handleLikeClick
           );
           cardSection.addItem(card.getCard());
         },
@@ -130,7 +130,13 @@ function handleCardFormSubmit(data) {
   api
     .addCard(data)
     .then((res) => {
-      const card = new Card(res, "#card__template", handleImageClick);
+      const card = new Card(
+        res,
+        "#card__template",
+        handleImageClick,
+        handleDeleteClick,
+        handleLikeClick
+      );
       cardList.prepend(card.getCard());
     })
     .catch((err) => {
@@ -146,7 +152,7 @@ function handleLikeClick() {
   if (this._isLiked) {
     api
       .removeLike(this._id)
-      .then((res) => {
+      .then(() => {
         this._handleLikeIcon();
       })
       .catch((err) => {
@@ -155,7 +161,7 @@ function handleLikeClick() {
   } else {
     api
       .likeCard(this._id)
-      .then((res) => {
+      .then(() => {
         this._handleLikeIcon();
       })
       .catch((err) => {
@@ -170,6 +176,7 @@ function handleDeleteClick() {
     .removeCard(this._id)
     .then(() => {
       this._handleDeleteIcon();
+      newConfirmationModal.close();
     })
     .catch((err) => {
       console.error(err);
