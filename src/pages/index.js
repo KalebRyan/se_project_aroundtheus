@@ -22,6 +22,7 @@ import {
   cardLinkInput,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
+import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
 
 // User Info
 const userInfo = new UserInfo({
@@ -69,6 +70,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const modalWithImage = new ModalWithImage({
   modalSelector: "#preview__image-modal",
 });
+
 modalWithImage.setEventListeners();
 
 const editModal = new ModalWithForm(
@@ -86,7 +88,17 @@ const newCardModal = new ModalWithForm(
   },
   handleCardFormSubmit
 );
+
 newCardModal.setEventListeners();
+
+const newConfirmationModal = new ModalWithConfirmation(
+  {
+    modalSelector: "#delete__card-modal",
+  },
+  handleFormSubmit
+);
+
+newConfirmationModal.setEventListeners();
 
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
@@ -107,6 +119,11 @@ function handleProfileFormSubmit(data) {
     });
   // userInfo.setUserInfo(data);
   editModal.close();
+}
+
+function handleFormSubmit() {
+  newConfirmationModal.setLoading(true);
+  newConfirmationModal.setLoading(false);
 }
 
 function handleCardFormSubmit(data) {
@@ -148,7 +165,15 @@ function handleLikeClick() {
 }
 
 function handleDeleteClick() {
-  this._handleDeleteIcon();
+  newConfirmationModal.open();
+  api
+    .removeCard(this._id)
+    .then(() => {
+      this._handleDeleteIcon();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 function handleImageClick(cardData) {
