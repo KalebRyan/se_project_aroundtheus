@@ -42,7 +42,6 @@ const api = new Api({
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
-    console.log(cardData);
     userInfo.setUserInfo(userData);
     const cardSection = new Section(
       {
@@ -100,6 +99,15 @@ const newConfirmationModal = new ModalWithConfirmation(
 
 newConfirmationModal.setEventListeners();
 
+// const editAvatarModal = new ModalWithForm(
+//   {
+//     modalSelector: "#avatar__edit-modal",
+//   },
+//   handleFormSubmit
+// );
+
+// editAvatarModal.setEventListeners();
+
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
   profileTitleInput.value = info.name;
@@ -148,6 +156,23 @@ function handleCardFormSubmit(data) {
   newCardModal.close();
 }
 
+function handleImageClick(cardData) {
+  modalWithImage.open(cardData);
+}
+
+function handleDeleteClick() {
+  newConfirmationModal.open();
+  api
+    .removeCard(this._id)
+    .then(() => {
+      this._handleDeleteIcon();
+      newConfirmationModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
 function handleLikeClick() {
   if (this._isLiked) {
     api
@@ -168,23 +193,6 @@ function handleLikeClick() {
         console.error(err);
       });
   }
-}
-
-function handleDeleteClick() {
-  newConfirmationModal.open();
-  api
-    .removeCard(this._id)
-    .then(() => {
-      this._handleDeleteIcon();
-      newConfirmationModal.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-}
-
-function handleImageClick(cardData) {
-  modalWithImage.open(cardData);
 }
 
 // Event Listeners
