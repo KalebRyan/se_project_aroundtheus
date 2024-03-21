@@ -22,7 +22,7 @@ export default class Card {
     });
 
     this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteClick();
+      this._handleDeleteClick(this);
     });
 
     this._likeButton.addEventListener("click", () => {

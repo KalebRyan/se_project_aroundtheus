@@ -8,6 +8,10 @@ export default class ModalWithConfirmation extends Modal {
     this._saveButton = this._modalElement.querySelector(".modal__button");
   }
 
+  setSubmitAction(handleFormSubmit) {
+    this._handleFormSubmit = handleFormSubmit;
+  }
+
   setLoading(isLoading) {
     isLoading
       ? (this._saveButton.textContent = "Saving...")

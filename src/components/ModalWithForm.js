@@ -17,6 +17,10 @@ export default class ModalWithForm extends Modal {
     return this._formValues;
   }
 
+  // setSubmitAction(handleFormSubmit) {
+  //   this._handleFormSubmit = handleFormSubmit;
+  // }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (e) => {

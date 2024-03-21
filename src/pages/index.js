@@ -94,19 +94,19 @@ const newConfirmationModal = new ModalWithConfirmation(
   {
     modalSelector: "#delete__card-modal",
   },
-  handleFormSubmit
+  handleDeleteClick
 );
 
 newConfirmationModal.setEventListeners();
 
-// const editAvatarModal = new ModalWithForm(
-//   {
-//     modalSelector: "#avatar__edit-modal",
-//   },
-//   handleFormSubmit
-// );
+const editAvatarModal = new ModalWithForm(
+  {
+    modalSelector: "#avatar__edit-modal",
+  },
+  handleAvatarFormSubmit
+);
 
-// editAvatarModal.setEventListeners();
+editAvatarModal.setEventListeners();
 
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
@@ -152,7 +152,7 @@ function handleCardFormSubmit(data) {
 
 function handleDeleteClick(card) {
   newConfirmationModal.open();
-  newConfirmationModal._handleFormSubmit(() => {
+  newConfirmationModal.setSubmitAction(() => {
     api
       .removeCard(card.id)
       .then(() => {
@@ -179,12 +179,24 @@ function handleLikeClick(card) {
     api
       .likeCard(card.id)
       .then((res) => {
-        card._handleLikeIcon(res.isLiked);
+        card.handleLikeIcon(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
       });
   }
+}
+
+function handleAvatarFormSubmit(data) {
+  api
+    .setAvatar(data)
+    .then((res) => {
+      userInfo.setUserInfo(res);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  editAvatarModal.close();
 }
 
 // Event Listeners
