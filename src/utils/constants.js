@@ -34,6 +34,7 @@ export const config = {
   errorClass: "modal__error_visible",
 };
 
+// Profile Modal
 export const profileEditModal = document.querySelector("#profile__edit-modal");
 export const profileEditButton = document.querySelector(
   "#profile__edit-button"
@@ -49,6 +50,9 @@ export const profileTitleInput = document.querySelector(
 );
 export const profileDescriptionInput = document.querySelector(
   ".modal__input_type_description"
+);
+export const editAvatarButton = document.querySelector(
+  "#profile__avatar-edit-button"
 );
 
 export const cardList = document.querySelector(".cards__list");

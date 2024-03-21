@@ -20,6 +20,7 @@ import {
   cardForm,
   cardTitleInput,
   cardLinkInput,
+  editAvatarButton,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
 import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
@@ -189,9 +190,9 @@ function handleLikeClick(card) {
 
 function handleAvatarFormSubmit(data) {
   api
-    .setAvatar(data)
+    .updateAvatar(data)
     .then((res) => {
-      userInfo.setUserInfo(res);
+      userInfo.setUserAvatar(res.avatar);
     })
     .catch((err) => {
       console.error(err);
@@ -209,6 +210,11 @@ profileEditButton.addEventListener("click", () => {
 addCardButton.addEventListener("click", () => {
   formValidators[cardForm.getAttribute("name")].resetValidation();
   newCardModal.open();
+});
+
+editAvatarButton.addEventListener("click", () => {
+  editAvatarModal.open();
+  formValidators[editAvatarModal._form.getAttribute("name")].resetValidation();
 });
 
 // Form Validation
