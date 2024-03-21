@@ -66,13 +66,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     console.error(err);
   });
 
-// Modals
+// Image Modal
 const modalWithImage = new ModalWithImage({
   modalSelector: "#preview__image-modal",
 });
 
 modalWithImage.setEventListeners();
 
+function handleImageClick(cardData) {
+  modalWithImage.open(cardData);
+}
+
+// Edit Profile Modal
 const editModal = new ModalWithForm(
   {
     modalSelector: "#profile__edit-modal",
@@ -81,44 +86,6 @@ const editModal = new ModalWithForm(
 );
 
 editModal.setEventListeners();
-
-const newCardModal = new ModalWithForm(
-  {
-    modalSelector: "#card__add-modal",
-  },
-  handleCardFormSubmit
-);
-
-newCardModal.setEventListeners();
-
-const newConfirmationModal = new ModalWithConfirmation(
-  {
-    modalSelector: "#delete__card-modal",
-  },
-  handleDeleteClick
-);
-
-newConfirmationModal.setEventListeners();
-
-const editAvatarModal = new ModalWithForm(
-  {
-    modalSelector: "#avatar__edit-modal",
-  },
-  handleAvatarFormSubmit
-);
-
-editAvatarModal.setEventListeners();
-
-function fillProfileForm() {
-  const info = userInfo.getUserInfo();
-  profileTitleInput.value = info.name;
-  profileDescriptionInput.value = info.description;
-}
-
-// Handlers
-function handleImageClick(cardData) {
-  modalWithImage.open(cardData);
-}
 
 function handleProfileFormSubmit(data) {
   api
@@ -131,6 +98,16 @@ function handleProfileFormSubmit(data) {
     });
   editModal.close();
 }
+
+// Add Card Modal
+const newCardModal = new ModalWithForm(
+  {
+    modalSelector: "#card__add-modal",
+  },
+  handleCardFormSubmit
+);
+
+newCardModal.setEventListeners();
 
 function handleCardFormSubmit(data) {
   api
@@ -149,21 +126,6 @@ function handleCardFormSubmit(data) {
       console.error(err);
     });
   newCardModal.close();
-}
-
-function handleDeleteClick(card) {
-  newConfirmationModal.open();
-  newConfirmationModal.setSubmitAction(() => {
-    api
-      .removeCard(card.id)
-      .then(() => {
-        card.handleDeleteIcon();
-        newConfirmationModal.close();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
 }
 
 function handleLikeClick(card) {
@@ -188,6 +150,41 @@ function handleLikeClick(card) {
   }
 }
 
+// Delete Card Modal
+const newConfirmationModal = new ModalWithConfirmation(
+  {
+    modalSelector: "#delete__card-modal",
+  },
+  handleDeleteClick
+);
+
+newConfirmationModal.setEventListeners();
+
+function handleDeleteClick(card) {
+  newConfirmationModal.open();
+  newConfirmationModal.setSubmitAction(() => {
+    api
+      .removeCard(card.id)
+      .then(() => {
+        card.handleDeleteIcon();
+        newConfirmationModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+}
+
+// Edit Avatar Modal
+const editAvatarModal = new ModalWithForm(
+  {
+    modalSelector: "#avatar__edit-modal",
+  },
+  handleAvatarFormSubmit
+);
+
+editAvatarModal.setEventListeners();
+
 function handleAvatarFormSubmit(data) {
   api
     .updateAvatar(data)
@@ -198,6 +195,12 @@ function handleAvatarFormSubmit(data) {
       console.error(err);
     });
   editAvatarModal.close();
+}
+
+function fillProfileForm() {
+  const info = userInfo.getUserInfo();
+  profileTitleInput.value = info.name;
+  profileDescriptionInput.value = info.description;
 }
 
 // Event Listeners
