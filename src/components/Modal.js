@@ -19,6 +19,12 @@ export default class Modal {
     }
   };
 
+  setLoading(isLoading) {
+    isLoading
+      ? (this._saveButton.textContent = "Saving...")
+      : (this._saveButton.textContent = "Saved.");
+  }
+
   setEventListeners() {
     this._modalElement.addEventListener("mousedown", (e) => {
       if (e.target === e.currentTarget) {

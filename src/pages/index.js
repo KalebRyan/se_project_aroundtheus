@@ -44,6 +44,7 @@ const api = new Api({
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData.avatar);
     const cardSection = new Section(
       {
         items: cardData,
@@ -88,6 +89,7 @@ const editModal = new ModalWithForm(
 editModal.setEventListeners();
 
 function handleProfileFormSubmit(data) {
+  editModal.setLoading(true);
   api
     .setUserInfo(data)
     .then((res) => {
@@ -95,6 +97,9 @@ function handleProfileFormSubmit(data) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      editModal.setLoading(false);
     });
   editModal.close();
 }
@@ -110,6 +115,7 @@ const newCardModal = new ModalWithForm(
 newCardModal.setEventListeners();
 
 function handleCardFormSubmit(data) {
+  newCardModal.setLoading(true);
   api
     .addCard(data)
     .then((res) => {
@@ -124,6 +130,9 @@ function handleCardFormSubmit(data) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      newCardModal.setLoading(false);
     });
   newCardModal.close();
 }
@@ -186,6 +195,7 @@ const editAvatarModal = new ModalWithForm(
 editAvatarModal.setEventListeners();
 
 function handleAvatarFormSubmit(data) {
+  editAvatarModal.setLoading(true);
   api
     .updateAvatar(data)
     .then((res) => {
@@ -193,6 +203,9 @@ function handleAvatarFormSubmit(data) {
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      editAvatarModal.setLoading(false);
     });
   editAvatarModal.close();
 }

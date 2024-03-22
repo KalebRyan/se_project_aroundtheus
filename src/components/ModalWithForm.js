@@ -5,6 +5,7 @@ export default class ModalWithForm extends Modal {
     super({ modalSelector });
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._modalElement.querySelector(".modal__form");
+    this._saveButton = this._modalElement.querySelector(".modal__button");
   }
 
   _getInputValues() {
@@ -16,10 +17,6 @@ export default class ModalWithForm extends Modal {
 
     return this._formValues;
   }
-
-  // setSubmitAction(handleFormSubmit) {
-  //   this._handleFormSubmit = handleFormSubmit;
-  // }
 
   setEventListeners() {
     super.setEventListeners();
