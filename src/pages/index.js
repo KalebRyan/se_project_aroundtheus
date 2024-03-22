@@ -139,7 +139,7 @@ function handleCardFormSubmit(data) {
     .addCard(data)
     .then((res) => {
       const card = createCard(res);
-      cardList.addItem(card);
+      cardSection.addItem(card);
       newCardModal.close();
     })
     .catch(console.error)
@@ -202,18 +202,27 @@ const editAvatarModal = new ModalWithForm(
 editAvatarModal.setEventListeners();
 
 function handleAvatarFormSubmit(data) {
-  editAvatarModal.renderLoading(true);
-  api
-    .updateAvatar(data)
-    .then((res) => {
+  function makeRequest() {
+    return api.updateAvatar(data).then((res) => {
       userInfo.setUserAvatar(res.avatar);
       editAvatarModal.close();
-    })
-    .catch(console.error)
-    .finally(() => {
-      editAvatarModal.renderLoading(false);
     });
+  }
+  handleSubmit(makeRequest, editAvatarModal);
 }
+
+// function handleAvatarFormSubmit(data) {
+//   editAvatarModal.renderLoading(true);
+//   api
+//     .updateAvatar(data)
+//     .then((res) => {
+//       userInfo.setUserAvatar(res.avatar);
+//     })
+//     .catch(console.error)
+//     .finally(() => {
+//       editAvatarModal.renderLoading(false);
+//     });
+// }
 
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
