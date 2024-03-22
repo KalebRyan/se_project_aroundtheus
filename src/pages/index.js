@@ -6,20 +6,14 @@ import ModalWithImage from "../components/ModalWithImage.js";
 import ModalWithForm from "../components/ModalWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import {
-  initialCards,
   config,
   profileEditButton,
   profileForm,
-  profileTitle,
-  profileDescription,
   profileTitleInput,
   profileDescriptionInput,
   cardList,
-  cardTemplate,
   addCardButton,
   cardForm,
-  cardTitleInput,
-  cardLinkInput,
   editAvatarButton,
 } from "../utils/constants.js";
 import Api from "../components/Api.js";
