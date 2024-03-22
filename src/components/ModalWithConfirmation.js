@@ -13,10 +13,9 @@ export default class ModalWithConfirmation extends Modal {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("click", (e) => {
+    this._form.addEventListener("submit", (e) => {
       e.preventDefault();
       this._handleFormSubmit();
-      this.close();
     });
   }
 }

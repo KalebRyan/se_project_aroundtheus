@@ -1,10 +1,12 @@
 import "../pages/index.css";
+import Api from "../components/Api.js";
 import Card from "../components/Card.js";
-import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
-import ModalWithImage from "../components/ModalWithImage.js";
-import ModalWithForm from "../components/ModalWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import FormValidator from "../components/FormValidator.js";
+import ModalWithForm from "../components/ModalWithForm.js";
+import ModalWithImage from "../components/ModalWithImage.js";
+import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
 import {
   config,
   profileEditButton,
@@ -16,8 +18,6 @@ import {
   cardForm,
   editAvatarButton,
 } from "../utils/constants.js";
-import Api from "../components/Api.js";
-import ModalWithConfirmation from "../components/ModalWithConfirmation.js";
 
 // User Info
 const userInfo = new UserInfo({
@@ -26,7 +26,7 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__avatar",
 });
 
-// API Calls
+// API
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
@@ -35,6 +35,19 @@ const api = new Api({
   },
 });
 
+// Create Card
+function createCard(cardData) {
+  const card = new Card(
+    cardData,
+    "#card__template",
+    handleImageClick,
+    handleDeleteClick,
+    handleLikeClick
+  );
+  return card.getCard();
+}
+
+// User Info and Initial Cards
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     userInfo.setUserInfo(userData);
@@ -43,23 +56,28 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       {
         items: cardData,
         renderer: (cardData) => {
-          const card = new Card(
-            cardData,
-            "#card__template",
-            handleImageClick,
-            handleDeleteClick,
-            handleLikeClick
-          );
-          cardSection.addItem(card.getCard());
+          const card = createCard(cardData);
+          cardSection.addItem(card);
         },
       },
       ".cards__list"
     );
     cardSection.renderItems();
   })
-  .catch((err) => {
-    console.error(err);
-  });
+  .catch(console.error);
+
+// Submit Handler
+function handleSubmit(request, modal, loadingText) {
+  modal.renderLoading(true, loadingText);
+  request()
+    .then(() => {
+      modal.close();
+    })
+    .catch(console.error)
+    .finally(() => {
+      modal.renderLoading(false);
+    });
+}
 
 // Image Modal
 const modalWithImage = new ModalWithImage({
@@ -83,20 +101,27 @@ const editModal = new ModalWithForm(
 editModal.setEventListeners();
 
 function handleProfileFormSubmit(data) {
-  editModal.setLoading(true);
-  api
-    .setUserInfo(data)
-    .then((res) => {
+  function makeRequest() {
+    return api.setUserInfo(data).then((res) => {
       userInfo.setUserInfo(res);
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      editModal.setLoading(false);
     });
-  editModal.close();
+  }
+  handleSubmit(makeRequest, editModal);
 }
+
+// function handleProfileFormSubmit(data) {
+//   editModal.renderLoading(true);
+//   api
+//     .setUserInfo(data)
+//     .then((res) => {
+//       userInfo.setUserInfo(res);
+//       editModal.close();
+//     })
+//     .catch(console.error)
+//     .finally(() => {
+//       editModal.renderLoading(false);
+//     });
+// }
 
 // Add Card Modal
 const newCardModal = new ModalWithForm(
@@ -109,26 +134,18 @@ const newCardModal = new ModalWithForm(
 newCardModal.setEventListeners();
 
 function handleCardFormSubmit(data) {
-  newCardModal.setLoading(true);
+  newCardModal.renderLoading(true);
   api
     .addCard(data)
     .then((res) => {
-      const card = new Card(
-        res,
-        "#card__template",
-        handleImageClick,
-        handleDeleteClick,
-        handleLikeClick
-      );
-      cardList.prepend(card.getCard());
+      const card = createCard(res);
+      cardList.addItem(card);
+      newCardModal.close();
     })
-    .catch((err) => {
-      console.error(err);
-    })
+    .catch(console.error)
     .finally(() => {
-      newCardModal.setLoading(false);
+      newCardModal.renderLoading(false);
     });
-  newCardModal.close();
 }
 
 function handleLikeClick(card) {
@@ -147,9 +164,7 @@ function handleLikeClick(card) {
       .then((res) => {
         card.handleLikeIcon(res.isLiked);
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   }
 }
 
@@ -172,9 +187,7 @@ function handleDeleteClick(card) {
         card.handleDeleteIcon();
         newConfirmationModal.close();
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   });
 }
 
@@ -189,19 +202,17 @@ const editAvatarModal = new ModalWithForm(
 editAvatarModal.setEventListeners();
 
 function handleAvatarFormSubmit(data) {
-  editAvatarModal.setLoading(true);
+  editAvatarModal.renderLoading(true);
   api
     .updateAvatar(data)
     .then((res) => {
       userInfo.setUserAvatar(res.avatar);
+      editAvatarModal.close();
     })
-    .catch((err) => {
-      console.error(err);
-    })
+    .catch(console.error)
     .finally(() => {
-      editAvatarModal.setLoading(false);
+      editAvatarModal.renderLoading(false);
     });
-  editAvatarModal.close();
 }
 
 function fillProfileForm() {

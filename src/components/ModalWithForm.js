@@ -6,6 +6,7 @@ export default class ModalWithForm extends Modal {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._modalElement.querySelector(".modal__form");
     this._saveButton = this._modalElement.querySelector(".modal__button");
+    this._buttonText = this._saveButton.textContent;
   }
 
   _getInputValues() {
@@ -16,6 +17,12 @@ export default class ModalWithForm extends Modal {
     });
 
     return this._formValues;
+  }
+
+  renderLoading(isLoading, loadingText = "Saving...") {
+    isLoading
+      ? (this._saveButton.textContent = loadingText)
+      : (this._saveButton.textContent = this._buttonText);
   }
 
   setEventListeners() {
