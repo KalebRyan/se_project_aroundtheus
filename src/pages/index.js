@@ -203,17 +203,17 @@ function fillProfileForm() {
 profileEditButton.addEventListener("click", () => {
   editModal.open();
   fillProfileForm();
-  formValidators[profileForm.getAttribute("name")].resetValidation();
+  formValidators[editModal.getFormName()].resetValidation();
 });
 
 addCardButton.addEventListener("click", () => {
-  formValidators[cardForm.getAttribute("name")].resetValidation();
   newCardModal.open();
+  formValidators[newCardModal.getFormName()].resetValidation();
 });
 
 editAvatarButton.addEventListener("click", () => {
   editAvatarModal.open();
-  formValidators[editAvatarModal._form.getAttribute("name")].resetValidation();
+  formValidators[editAvatarModal.getFormName()].resetValidation();
 });
 
 // Form Validation

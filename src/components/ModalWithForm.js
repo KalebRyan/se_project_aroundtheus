@@ -19,6 +19,10 @@ export default class ModalWithForm extends Modal {
     return this._formValues;
   }
 
+  getFormName() {
+    return this._form.getAttribute("name");
+  }
+
   renderLoading(isLoading, loadingText = "Saving...") {
     isLoading
       ? (this._saveButton.textContent = loadingText)
