@@ -24,8 +24,6 @@ export const editAvatarButton = document.querySelector(
   "#profile__avatar-edit-button"
 );
 
-export const cardList = document.querySelector(".cards__list");
-
 // Card Template
 export const cardTemplate =
   document.querySelector("#card__template").content.firstElementChild;

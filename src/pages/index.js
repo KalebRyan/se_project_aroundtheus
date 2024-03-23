@@ -13,7 +13,6 @@ import {
   profileForm,
   profileTitleInput,
   profileDescriptionInput,
-  cardList,
   addCardButton,
   cardForm,
   editAvatarButton,
@@ -47,12 +46,14 @@ function createCard(cardData) {
   return card.getCard();
 }
 
+let cardSection;
+
 // User Info and Initial Cards
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData.avatar);
-    const cardSection = new Section(
+    cardSection = new Section(
       {
         items: cardData,
         renderer: (cardData) => {
@@ -109,20 +110,6 @@ function handleProfileFormSubmit(data) {
   handleSubmit(makeRequest, editModal);
 }
 
-// function handleProfileFormSubmit(data) {
-//   editModal.renderLoading(true);
-//   api
-//     .setUserInfo(data)
-//     .then((res) => {
-//       userInfo.setUserInfo(res);
-//       editModal.close();
-//     })
-//     .catch(console.error)
-//     .finally(() => {
-//       editModal.renderLoading(false);
-//     });
-// }
-
 // Add Card Modal
 const newCardModal = new ModalWithForm(
   {
@@ -134,18 +121,13 @@ const newCardModal = new ModalWithForm(
 newCardModal.setEventListeners();
 
 function handleCardFormSubmit(data) {
-  newCardModal.renderLoading(true);
-  api
-    .addCard(data)
-    .then((res) => {
+  function makeRequest() {
+    return api.addCard(data).then((res) => {
       const card = createCard(res);
       cardSection.addItem(card);
-      newCardModal.close();
-    })
-    .catch(console.error)
-    .finally(() => {
-      newCardModal.renderLoading(false);
     });
+  }
+  handleSubmit(makeRequest, newCardModal);
 }
 
 function handleLikeClick(card) {
@@ -210,19 +192,6 @@ function handleAvatarFormSubmit(data) {
   }
   handleSubmit(makeRequest, editAvatarModal);
 }
-
-// function handleAvatarFormSubmit(data) {
-//   editAvatarModal.renderLoading(true);
-//   api
-//     .updateAvatar(data)
-//     .then((res) => {
-//       userInfo.setUserAvatar(res.avatar);
-//     })
-//     .catch(console.error)
-//     .finally(() => {
-//       editAvatarModal.renderLoading(false);
-//     });
-// }
 
 function fillProfileForm() {
   const info = userInfo.getUserInfo();
