@@ -17,20 +17,24 @@
       </header>
       <main class="content page__section">
         <section class="profile">
-          <img
-            src="<%=require('./images/jacques-cousteau.png')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar-wrapper">
+            <img src="#" alt="Avatar" class="profile__avatar" />
+            <button
+              id="profile__avatar-edit-button"
+              class="profile__avatar-edit-button"
+              type="button"
+              aria-label="edit"
+            ></button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button
               id="profile__edit-button"
               class="profile__edit-button"
               type="button"
               aria-label="edit"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             id="profile__add-button"
@@ -89,7 +93,7 @@
         <form class="modal__form" name="card-form" novalidate>
           <input
             type="text"
-            name="title"
+            name="name"
             id="place-title"
             class="modal__input modal__input_type_title"
             placeholder="Title"
@@ -114,6 +118,44 @@
             disabled
           >
             Create
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="avatar__edit-modal">
+      <div class="modal__container">
+        <button class="modal__close-button" type="button"></button>
+        <h3 class="modal__heading">Change Profile Picture</h3>
+        <form class="modal__form" name="avatar-form" novalidate>
+          <input
+            type="url"
+            name="avatar"
+            id="avatar-link"
+            class="modal__input modal__input_type_link"
+            placeholder="Image link"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            aria-label="save"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="delete__card-modal">
+      <div class="modal__container">
+        <button class="modal__close-button" type="button"></button>
+        <h3 class="modal__heading">Are you sure?</h3>
+        <form class="modal__form" name="delete-form" novalidate>
+          <button type="submit" class="modal__button" aria-label="yes">
+            Yes
           </button>
         </form>
       </div>
